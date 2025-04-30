@@ -1,0 +1,14 @@
+server:
+  log_url: "https://your-domain.com/logs"
+  username: "your-username"
+  password: "your-password"
+  check_interval: "5m"  # How often to check for new logs
+
+sentry:
+  dsn: "https://your-sentry-dsn"
+  environment: "production"
+  project: "your-project-name"
+
+logging:
+  level: "info"
+  file: "app.log" 
