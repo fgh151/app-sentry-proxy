@@ -15,8 +15,8 @@ type Client struct {
 
 func NewClient(dsn, environment, project string) (*Client, error) {
 	err := sentry.Init(sentry.ClientOptions{
-		Dsn:         dsn,
-		Environment: environment,
+		Dsn:              dsn,
+		Environment:      environment,
 		TracesSampleRate: 1.0,
 	})
 	if err != nil {
@@ -31,7 +31,6 @@ func NewClient(dsn, environment, project string) (*Client, error) {
 }
 
 func (c *Client) SendEvent(event *sentry.Event) error {
-	event.Project = c.project
 	eventID := sentry.CaptureEvent(event)
 	if eventID == nil {
 		return fmt.Errorf("failed to capture event")
@@ -41,4 +40,4 @@ func (c *Client) SendEvent(event *sentry.Event) error {
 
 func (c *Client) Flush() {
 	sentry.Flush(2 * time.Second)
-} 
+}
