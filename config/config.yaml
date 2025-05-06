@@ -3,6 +3,7 @@ server:
   username: "your-username"
   password: "your-password"
   check_interval: "5m"  # How often to check for new logs
+  state_file: "data/state.json"  # File to store log reading state
 
 sentry:
   dsn: "https://your-sentry-dsn"

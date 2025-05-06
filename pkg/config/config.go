@@ -13,6 +13,7 @@ type Config struct {
 		Username      string        `yaml:"username"`
 		Password      string        `yaml:"password"`
 		CheckInterval time.Duration `yaml:"check_interval"`
+		StateFile     string        `yaml:"state_file"`
 	} `yaml:"server"`
 	Sentry struct {
 		DSN         string `yaml:"dsn"`
@@ -37,4 +38,4 @@ func LoadConfig(path string) (*Config, error) {
 	}
 
 	return &config, nil
-} 
+}

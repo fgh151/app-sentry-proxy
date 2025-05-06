@@ -21,8 +21,14 @@ func main() {
 		log.Fatalf("Failed to load config: %v", err)
 	}
 
+	// Initialize state manager
+	state, err := client.NewLogState(cfg.Server.StateFile)
+	if err != nil {
+		log.Fatalf("Failed to initialize state manager: %v", err)
+	}
+
 	// Initialize clients
-	logClient := client.NewLogClient(cfg.Server.LogURL, cfg.Server.Username, cfg.Server.Password)
+	logClient := client.NewLogClient(cfg.Server.LogURL, cfg.Server.Username, cfg.Server.Password, state)
 	logParser := parser.NewLogParser()
 	sentryClient, err := sentry.NewClient(cfg.Sentry.DSN, cfg.Sentry.Environment, cfg.Sentry.Project)
 	if err != nil {
@@ -78,4 +84,4 @@ func processLogs(ctx context.Context, logClient *client.LogClient, logParser *pa
 	}
 
 	return nil
-} 
+}
